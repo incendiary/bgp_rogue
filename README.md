@@ -2,7 +2,6 @@
 
 > Uses docker and pybgpstream to search for rogue Autonomous system announcing defined prefixes
 
-
 ```sh
 $ docker build -t bgprogue . && docker run bgprogue
 ```
@@ -14,7 +13,6 @@ Modify the these_prefixes & these_as paramaters to your prefixes and AS.  Then u
 ## Example Run
 
 ![](bgp_rogue.fin.gif)
-
 
 ## License
 
