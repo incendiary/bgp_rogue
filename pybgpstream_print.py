@@ -1,8 +1,26 @@
 #!/usr/bin/env python
 import argparse
 import datetime
+import json as _json
+import os
+import urllib.error
+import urllib.request
 
 import pybgpstream
+
+
+def _send_discord_alert(message: str) -> None:
+    """Send a message to Discord via webhook. No-op if DISCORD_WEBHOOK_URL is unset."""
+    url = os.environ.get("DISCORD_WEBHOOK_URL")
+    if not url:
+        return
+    payload = _json.dumps({"content": message}).encode()
+    req = urllib.request.Request(url, data=payload, headers={"Content-Type": "application/json"})
+    try:
+        urllib.request.urlopen(req, timeout=5)
+    except (urllib.error.URLError, OSError) as exc:
+        print(f"[!] Discord alert failed: {exc}", flush=True)
+
 
 filter_start_date_time_obj = None
 
@@ -39,7 +57,9 @@ def generate_streams(list_of_prefix, list_of_auth_as, interval, collectors):
             pref, aspath, asorin, is_hijack = _check_elem(elem, list_of_auth_as)
             print(f"Expected Announcement found: {pref} - {aspath} - {asorin}", flush=True)
             if is_hijack:
-                print(f"*** Potential Hijack ***\n prefix {pref} by as {asorin}")
+                alert = f"*** Potential Hijack ***\n prefix {pref} by as {asorin}"
+                print(alert)
+                _send_discord_alert(alert)
                 print(elem)
 
         except AttributeError:

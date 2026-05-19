@@ -95,6 +95,20 @@ Expected Announcement found: 185.70.40.0/24 - 1299 3356 1221 - 1221
 
 ---
 
+## Discord Alerting
+
+Set the `DISCORD_WEBHOOK_URL` environment variable to receive a message in a Discord channel whenever a potential hijack is detected:
+
+```sh
+docker run -e DISCORD_WEBHOOK_URL=https://discord.com/api/webhooks/YOUR/WEBHOOK bgprogue \
+  --prefix 185.70.40.0/24 --authorized-as 62371 \
+  --start "2020-09-29 16:00:00" --stop "2020-09-29 18:59:59"
+```
+
+See [DEPLOYMENT.md](DEPLOYMENT.md) for Docker Compose setup and webhook creation instructions.
+
+---
+
 ## Development
 
 The project uses [Ruff](https://docs.astral.sh/ruff/) and [Black](https://black.readthedocs.io/) for linting and formatting, enforced via [pre-commit](https://pre-commit.com/) hooks (including [Gitleaks](https://github.com/gitleaks/gitleaks) for secret scanning).
@@ -119,6 +133,9 @@ pre-commit install
 | 6 | ✅ Done | GitHub Actions CI workflow (lint + Docker build) |
 | 7 | ✅ [#1](https://github.com/incendiary/bgp_rogue/issues/1) | Add unit tests for hijack detection logic |
 | 8 | ✅ Done | Support configurable collectors via `--collector` flag |
+| [#4](https://github.com/incendiary/bgp_rogue/issues/4) | ✅ Done | Discord webhook alerting on hijack detection (set `DISCORD_WEBHOOK_URL`) |
+| [#5](https://github.com/incendiary/bgp_rogue/issues/5) | ✅ Done | Containerised deployment guide (`DEPLOYMENT.md`) |
+| [#6](https://github.com/incendiary/bgp_rogue/issues/6) | ✅ Done | detect-secrets baseline and pre-commit hook |
 
 ---
 
