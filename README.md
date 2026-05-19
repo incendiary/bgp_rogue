@@ -136,6 +136,7 @@ pre-commit install
 | [#4](https://github.com/incendiary/bgp_rogue/issues/4) | ✅ Done | Discord webhook alerting on hijack detection (set `DISCORD_WEBHOOK_URL`) |
 | [#5](https://github.com/incendiary/bgp_rogue/issues/5) | ✅ Done | Containerised deployment guide (`DEPLOYMENT.md`) |
 | [#6](https://github.com/incendiary/bgp_rogue/issues/6) | ✅ Done | detect-secrets baseline and pre-commit hook |
+| 9 | 🔲 Planned | ASN-to-org name enrichment — resolve origin AS to operator name via bgpview.io API for human-readable hijack alerts |
 
 ---
 
