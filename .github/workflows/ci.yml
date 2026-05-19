@@ -7,6 +7,16 @@ on:
     branches: [main]
 
 jobs:
+  detect-secrets:
+    name: Detect Secrets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Baseline check
+        run: |
+          pip install --quiet detect-secrets
+          detect-secrets scan --baseline .secrets.baseline
+
   lint:
     name: Lint
     runs-on: ubuntu-latest
